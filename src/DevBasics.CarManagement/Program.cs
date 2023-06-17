@@ -34,6 +34,7 @@ namespace DevBasics.CarManagement
             var bulkRegistrationServiceMock = new BulkRegistrationServiceMock();
             var leasingRegistrationRepository = new LeasingRegistrationRepository();
 
+
             var model = new CarRegistrationModel();
             var configuration = new MapperConfiguration(cnfgrtn => model.CreateMappings(cnfgrtn));
             var mapper = configuration.CreateMapper();
