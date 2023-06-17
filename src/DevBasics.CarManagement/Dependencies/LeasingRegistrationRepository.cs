@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace DevBasics.CarManagement.Dependencies
 {
-    internal sealed class LeasingRegistrationRepository : ILeasingRegistrationRepository
+    internal sealed class LeasingRegistrationRepository : IGetAppSetting, IUpdateCar, IInsertHistory
     {
         public IDictionary<int, Tuple<CarRegistrationDto, string, string, string>> Registrations { get; } = new Dictionary<int, Tuple<CarRegistrationDto, string, string, string>>();
 

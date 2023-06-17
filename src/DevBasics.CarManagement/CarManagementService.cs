@@ -21,13 +21,17 @@ namespace DevBasics.CarManagement
             ITransactionStateService transactionStateService,
             IBulkRegistrationService bulkRegisterService,
             IRegistrationDetailService registrationDetailService,
-            ILeasingRegistrationRepository registrationRepository,
-            ICarRegistrationRepository carRegistrationRepository)
+            ICarRegistrationRepository carRegistrationRepository,
+            IGetAppSetting getAppSetting = null,
+            IUpdateCar updateCar = null,
+            IInsertHistory insertHistory = null)
                 : base(settings, httpHeader, apiClient,
                       transactionStateService: transactionStateService,
                       bulkRegistrationService: bulkRegisterService,
                       registrationDetailService: registrationDetailService,
-                      leasingRegistrationRepository: registrationRepository,
+                      getAppSetting: getAppSetting,
+                      updateCar : updateCar,
+                      insertHistory : insertHistory,
                       carLeasingRepository: carRegistrationRepository)
         {
             Console.WriteLine($"Initializing service {nameof(CarManagementService)}");
@@ -219,8 +223,8 @@ namespace DevBasics.CarManagement
                     Console.WriteLine(
                         $"Trying to update car {carToUpdate.CarIdentificationNumber} in database...");
 
-                    await LeasingRegistrationRepository.UpdateCarAsync(carToUpdate);
-                    await LeasingRegistrationRepository.InsertHistoryAsync(carToUpdate,
+                    await _updateCar.UpdateCarAsync(carToUpdate);
+                    await _insertHistory.InsertHistoryAsync(carToUpdate,
                         identity,
                         ((carToUpdate.TransactionState.HasValue) ? Enum.GetName(typeof(TransactionResult), (int)carToUpdate.TransactionState) : null),
                         ((carToUpdate.TransactionType.HasValue) ? Enum.GetName(typeof(RegistrationType), (int)carToUpdate.TransactionType) : null)

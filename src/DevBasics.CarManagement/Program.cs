@@ -30,8 +30,10 @@ namespace DevBasics.CarManagement
                     new TransactionStateServiceMock(),
                     bulkRegistrationServiceMock,
                     new RegistrationDetailServiceMock(),
+                    carRegistrationRepositoryMock,
                     leasingRegistrationRepository,
-                    carRegistrationRepositoryMock),
+                    leasingRegistrationRepository,
+                    leasingRegistrationRepository),
                 new CarRegistrationRepository(
                     leasingRegistrationRepository,
                     bulkRegistrationServiceMock,
