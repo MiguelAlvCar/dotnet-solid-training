@@ -21,16 +21,24 @@ namespace DevBasics.CarManagement
                 bulkRegistrationServiceMock,
                 mapper);
 
-            var service = new CarManagementService(
-                mapper,
-                new CarManagementSettings(),
-                new HttpHeaderSettings(),
-                new KowoLeasingApiClientMock(),
-                new TransactionStateServiceMock(),
-                bulkRegistrationServiceMock,
-                new RegistrationDetailServiceMock(),
-                leasingRegistrationRepository,
-                carRegistrationRepositoryMock);
+            var service = new CarRegistrationService(
+                new CarManagementService(
+                    mapper,
+                    new CarManagementSettings(),
+                    new HttpHeaderSettings(),
+                    new KowoLeasingApiClientMock(),
+                    new TransactionStateServiceMock(),
+                    bulkRegistrationServiceMock,
+                    new RegistrationDetailServiceMock(),
+                    leasingRegistrationRepository,
+                    carRegistrationRepositoryMock),
+                new CarRegistrationRepository(
+                    leasingRegistrationRepository,
+                    bulkRegistrationServiceMock,
+                    mapper)
+                );
+
+
 
             var result = await service.RegisterCarsAsync(
                 new RegisterCarsModel
