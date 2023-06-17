@@ -59,9 +59,8 @@ namespace DevBasics.CarManagement
                     }
                 }
 
-                CarPoolNumberHelper.Generate(
-                    CarBrand.Toyota,
-                    registerCarsModel.Cars.FirstOrDefault().CarPool,
+                var toyota = new Toyota();
+                toyota.GenerateRegistration(registerCarsModel.Cars.FirstOrDefault().CarPool,
                     out string registrationId,
                     out string carPoolNumber);
 

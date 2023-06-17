@@ -34,7 +34,7 @@ namespace DevBasics.CarManagement
 
             _mapper = mapper;
         }
-        
+
         public bool HasMissingData(CarRegistrationModel car)
         {
             return (string.IsNullOrWhiteSpace(car.CompanyId))
