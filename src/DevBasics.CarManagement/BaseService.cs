@@ -7,6 +7,10 @@ namespace DevBasics.CarManagement
 {
     public class BaseService
     {
+        protected IGetAppSetting _getAppSetting;
+        protected IUpdateCar _updateCar;
+        protected IInsertHistory _insertHistory;
+
         public CarManagementSettings Settings { get; set; }
 
         public HttpHeaderSettings HttpHeader { get; set; }
@@ -19,8 +23,6 @@ namespace DevBasics.CarManagement
 
         public IRegistrationDetailService RegistrationDetailService { get; set; }
 
-        public ILeasingRegistrationRepository LeasingRegistrationRepository { get; set; }
-
         public ICarRegistrationRepository CarLeasingRepository { get; set; }
 
         public BaseService(
@@ -30,7 +32,9 @@ namespace DevBasics.CarManagement
             IBulkRegistrationService bulkRegistrationService = null,
             ITransactionStateService transactionStateService = null,
             IRegistrationDetailService registrationDetailService = null,
-            ILeasingRegistrationRepository leasingRegistrationRepository = null,
+            IGetAppSetting getAppSetting = null,
+            IUpdateCar updateCar = null,
+            IInsertHistory insertHistory = null,
             ICarRegistrationRepository carLeasingRepository = null)
         {
             // Mandatory
@@ -44,7 +48,7 @@ namespace DevBasics.CarManagement
             RegistrationDetailService = registrationDetailService;
 
             // Optional Repositories
-            LeasingRegistrationRepository = leasingRegistrationRepository;
+            _getAppSetting = getAppSetting;
             CarLeasingRepository = carLeasingRepository;
         }
 
@@ -54,7 +58,7 @@ namespace DevBasics.CarManagement
 
             try
             {
-                AppSettingDto settingResult = await LeasingRegistrationRepository.GetAppSettingAsync(HttpHeader.SalesOrgIdentifier, HttpHeader.WebAppType);
+                AppSettingDto settingResult = await _getAppSetting.GetAppSettingAsync(HttpHeader.SalesOrgIdentifier, HttpHeader.WebAppType);
 
                 if (settingResult == null)
                 {
