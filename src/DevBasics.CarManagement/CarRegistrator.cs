@@ -9,13 +9,13 @@ using static DevBasics.CarManagement.Dependencies.RegistrationApiResponseBase;
 
 namespace DevBasics.CarManagement
 {
-    internal class CarRegistrationService
+    internal class CarRegistrator
     {
         private readonly CarManagementService _carManagementService;
 
         private readonly CarRegistrationRepository _carRegistrationRepository;
 
-        internal CarRegistrationService(CarManagementService carManagementService, CarRegistrationRepository carRegistrationRepository)
+        internal CarRegistrator(CarManagementService carManagementService, CarRegistrationRepository carRegistrationRepository)
         {
             _carManagementService = carManagementService;
             _carRegistrationRepository = carRegistrationRepository;
