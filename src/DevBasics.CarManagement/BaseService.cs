@@ -49,6 +49,8 @@ namespace DevBasics.CarManagement
 
             // Optional Repositories
             _getAppSetting = getAppSetting;
+            _updateCar = updateCar;
+            _insertHistory = insertHistory;
             CarLeasingRepository = carLeasingRepository;
         }
 
