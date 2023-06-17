@@ -15,23 +15,14 @@ namespace DevBasics.CarManagement
 
         public HttpHeaderSettings HttpHeader { get; set; }
 
-        public IKowoLeasingApiClient ApiClient { get; set; }
-
         public IBulkRegistrationService BulkRegistrationService { get; set; }
-
-        public ITransactionStateService TransactionStateService { get; set; }
-
-        public IRegistrationDetailService RegistrationDetailService { get; set; }
 
         public ICarRegistrationRepository CarLeasingRepository { get; set; }
 
         public BaseService(
             CarManagementSettings settings,
             HttpHeaderSettings httpHeader,
-            IKowoLeasingApiClient apiClient,
             IBulkRegistrationService bulkRegistrationService = null,
-            ITransactionStateService transactionStateService = null,
-            IRegistrationDetailService registrationDetailService = null,
             IGetAppSetting getAppSetting = null,
             IUpdateCar updateCar = null,
             IInsertHistory insertHistory = null,
@@ -40,12 +31,9 @@ namespace DevBasics.CarManagement
             // Mandatory
             Settings = settings;
             HttpHeader = httpHeader;
-            ApiClient = apiClient;
 
             // Optional Services
             BulkRegistrationService = bulkRegistrationService;
-            TransactionStateService = transactionStateService;
-            RegistrationDetailService = registrationDetailService;
 
             // Optional Repositories
             _getAppSetting = getAppSetting;
